@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>HANOCHA-X220</Machine>
+    <WindowsUser>Saiki</WindowsUser>
+    <SolutionConfiguration>Release|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\MetroTwitter_Rev1.exe">
+      <PackagePath>MetroTwitter_Rev1.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\MetroTwitter_Rev1.pdb">
+      <PackagePath>MetroTwitter_Rev1.pdb</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\packages\Newtonsoft.Json.4.5.9\lib\winrt45\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\packages\Newtonsoft.Json.4.5.9\lib\winrt45\Newtonsoft.Json.xml">
+      <PackagePath>Newtonsoft.Json.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Assets\Logo.png">
+      <PackagePath>Assets\Logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Assets\SmallLogo.png">
+      <PackagePath>Assets\SmallLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Assets\SplashScreen.png">
+      <PackagePath>Assets\SplashScreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Assets\WideLogo.png">
+      <PackagePath>Assets\WideLogo.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Icons\reply.png">
+      <PackagePath>Icons\reply.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Icons\reply_hover.png">
+      <PackagePath>Icons\reply_hover.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\Icons\twitter-bird-light-bgs.png">
+      <PackagePath>Icons\twitter-bird-light-bgs.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\App.xaml">
+      <PackagePath>App.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\Activation.xaml">
+      <PackagePath>Activation.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\Common\StandardStyles.xaml">
+      <PackagePath>Common\StandardStyles.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\MainPage.xaml">
+      <PackagePath>MainPage.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\OriginalStyles.xaml">
+      <PackagePath>OriginalStyles.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Saiki\Documents\Visual Studio 2012\Projects\MetroTwitter_Rev1\MetroTwitter_Rev1\bin\Release\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

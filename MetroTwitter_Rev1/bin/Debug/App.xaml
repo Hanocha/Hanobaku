@@ -1,0 +1,30 @@
+﻿<Application
+    x:Class="MetroTwitter_Rev1.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MetroTwitter_Rev1"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- 
+                    プラットフォームの外観の共通の要素を定義するスタイル
+                    Visual Studio プロジェクトおよびアイテム テンプレートで必要です
+                 -->
+                <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style x:Key="TwitterStyles" TargetType="Button" BasedOn="{StaticResource AppBarButtonStyle}">
+                <Setter Property="AutomationProperties.AutomationId" Value="EditAppBarButton"/>
+                <Setter Property="AutomationProperties.Name" Value="Edit"/>
+                <Setter Property="Content" Value="&#xE104;"/>
+            </Style>
+            
+            <local:Bool2Visibility x:Name="bool2Visibility"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+

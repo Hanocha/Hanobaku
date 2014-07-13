@@ -1,0 +1,246 @@
+﻿<common:LayoutAwarePage
+    x:Name="pageRoot"
+    x:Class="MetroTwitter_Rev1.MainPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MetroTwitter_Rev1"
+    xmlns:common="using:MetroTwitter_Rev1.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">MetroTweet</x:String>
+
+        <Style x:Key="TweetButton" TargetType="Button" BasedOn="{StaticResource AppBarButtonStyle}">
+            <Setter Property="AutomationProperties.AutomationId" Value="EditAppBarButton"/>
+            <Setter Property="AutomationProperties.Name" Value="Tweet"/>
+            <Setter Property="Content" Value="&#xE104;"/>
+        </Style>
+    </Page.Resources>
+
+
+    <Page.BottomAppBar>
+        <AppBar x:ConnectionId='1' x:Name="BottomTweetBar"                               >
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:ConnectionId='2' Name="Tweet_Button" Style="{StaticResource EditAppBarButtonStyle}"                            AutomationProperties.Name="つぶやく"/>
+                    <Button x:ConnectionId='3' Name="Reply_Button" Style="{StaticResource RedoAppBarButtonStyle}"                            AutomationProperties.Name="返信" Visibility="Collapsed"/>
+                    <Button x:ConnectionId='4' Name="Refresh_Button" Style="{StaticResource RefreshAppBarButtonStyle}" AutomationProperties.Name="更新"                             />
+                    <Button x:ConnectionId='5' Name="Favorite_Button" Style="{StaticResource FavoriteAppBarButtonStyle}" AutomationProperties.Name="ふぁぼる"                                 Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Style="{StaticResource LayoutRootStyle}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PortraitBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="grid">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Thickness>20,0,20,60</Thickness>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        
+        
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:ConnectionId='15' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+        </Grid>
+        
+        
+        <!-- Main Timelines view -->
+        <Grid x:Name="grid" Grid.Row="1" Margin="120,0,100,60">
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+           
+            
+            <Button x:ConnectionId='9' x:Name="GoToHomeTimeline_Button" Content="Home Timeline" Padding="5,2" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold" BorderThickness="20,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" HorizontalContentAlignment="Left"                                       BorderBrush="{StaticResource ButtonForegroundThemeBrush}"/>
+
+            <Button x:ConnectionId='10' x:Name="GoToMentions_Button" Content="Mention" Padding="5,2" Grid.Column="1" Grid.Row="0" FontSize="20" FontWeight="Bold" BorderBrush="{StaticResource ButtonForegroundThemeBrush}" BorderThickness="20,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" HorizontalContentAlignment="Left"                                      />
+
+            <Button x:ConnectionId='11' x:Name="GotoDirectMessage_Button" Content="DirectMessage" Padding="5,2" Grid.Column="2" Grid.Row="0" FontSize="20" FontWeight="Bold" BorderBrush="{StaticResource ButtonForegroundThemeBrush}" BorderThickness="20,1,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Null}" HorizontalContentAlignment="Left"                                      />
+
+
+            <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Padding="0">
+                <Image x:Name="TwitterBird" Source="Icons/twitter-bird-light-bgs.png" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+            
+            
+            <ListView x:ConnectionId='12' x:Name="HomeTimelineList" SelectionMode="Extended" Grid.Column="0" Grid.Row="2" Margin="0,0,0,0"                                                      ScrollViewer.VerticalScrollBarVisibility="Visible" BorderBrush="#FF000066" BorderThickness="0,0,1,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                <Image Source="{Binding user.profile_image_url}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="10,0,0,0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding user.name}" Style="{StaticResource TitleTextStyle}"/>
+                                    <TextBlock Text="{Binding user.screen_name}" FontSize="14" Foreground="#FF666666" Margin="0,4,0,0" />                                   
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Text="{Binding text}" FontSize="16" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                            <TextBlock Grid.Row="2" Text="{Binding created_at}" FontSize="12" Margin="0,2,0,0"/>
+                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                <TextBlock Text="Retweeted by:" Visibility="{Binding Path=isretweeted, Converter={StaticResource bool2Visibility}}"/>
+                                <TextBlock Text="{Binding retweeted_by}" Visibility="{Binding Path=isretweeted, Converter={StaticResource bool2Visibility}}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <ListView x:ConnectionId='13' x:Name="MentionsList" Grid.Column="1" Grid.Row="2" SelectionMode="Extended" ScrollViewer.VerticalScrollBarVisibility="Visible"                                                  BorderThickness="0,0,1,0" BorderBrush="#FF660000" Margin="0,0,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                <Image Source="{Binding user.profile_image_url}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="10,0,0,0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding user.name}" Style="{StaticResource TitleTextStyle}"/>
+                                    <TextBlock Text="{Binding user.screen_name}" FontSize="14" Foreground="#FF666666" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Text="{Binding text}" FontSize="16" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                            <TextBlock Grid.Row="2" Text="{Binding created_at}" FontSize="12" Margin="0,2,0,0"/>
+                            <StackPanel Grid.Row="3" HorizontalAlignment="Right">
+                                <Button Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Visibility="Collapsed">
+                                    <Image Source="Icons/reply.png" Width="20" Height="20"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            
+            <ListView x:ConnectionId='14' x:Name="DMList" Grid.Column="2" Grid.Row="2" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderThickness="0,0,1,0" BorderBrush="#FF006600"                                            Margin="0,0,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                <Image Source="{Binding sender.profile_image_url}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <StackPanel Orientation="Vertical" Margin="10,0,0,0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding sender.name}" Style="{StaticResource TitleTextStyle}"/>
+                                    <TextBlock Text="{Binding sender.screen_name}" FontSize="14" Foreground="#FF666666" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Text="{Binding text}" FontSize="16" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                            <TextBlock Grid.Row="2" Text="{Binding created_at}" FontSize="12" Margin="0,2,0,0"/>
+                            <StackPanel Grid.Row="3" HorizontalAlignment="Right">
+                                <Button Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Visibility="Collapsed">
+                                    <Image Source="Icons/reply.png" Width="20" Height="20"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            
+            <ProgressBar x:Name="LoadingProgressBar" IsIndeterminate="True" Grid.Column="0" Grid.Row="3" Visibility="Collapsed"/>
+        </Grid>
+
+
+        <Popup x:Name="TweetPopup" Width="400" Height="150" Grid.Row="1" Canvas.ZIndex="1">
+            <Grid Background="#FFE5E5E5" Width="400" Height="150">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <ProgressRing x:Name="Submitting_Ring" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/> 
+                <TextBox x:ConnectionId='6' x:Name="Status_TextBox" Grid.Column="0" Grid.Row="1" Width="250" Height="100" Margin="10,0,0,0"                                  TextWrapping="Wrap"                              AcceptsReturn="True"/>
+                <Button x:ConnectionId='7' x:Name="Submit_Button" Grid.Column="1" Grid.Row="1" Content="Tweet" Margin="40,0,0,0"                            />
+                <Button x:ConnectionId='8' x:Name="Popup_Close_Button" Content="x" Grid.Column="1" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Padding="0,-5,0,0"                                  Width="39" VerticalContentAlignment="Stretch"/>
+            </Grid>
+        </Popup>
+
+
+
+
+    </Grid>
+</common:LayoutAwarePage>
+

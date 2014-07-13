@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MetroTwitter_Rev1">
+
+    <!-- SplitPage に表示される、リストに適した高さ 130 ピクセルのアイテム テンプレート -->
+    <DataTemplate x:Key="StatusViewItems">
+        <Grid Height="110" Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
+                <Image Source="{Binding user.profile_image_url}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
+            </Border>
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                <TextBlock Text="{Binding user.name}" Style="{StaticResource TitleTextStyle}" TextWrapping="NoWrap"/>
+                <TextBlock Text="{Binding text}" Style="{StaticResource BodyTextStyle}" MaxHeight="60"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>
